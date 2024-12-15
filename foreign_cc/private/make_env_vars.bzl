@@ -27,6 +27,7 @@ def get_make_env_vars(
 
     # -I flags should be put into preprocessor flags, CPPFLAGS
     # https://www.gnu.org/software/autoconf/manual/autoconf-2.63/html_node/Preset-Output-Variables.html
+
     if "CPPFLAGS" in vars.keys():
         vars["CPPFLAGS"] = vars["CPPFLAGS"] + deps_flags.flags
     else:
@@ -72,10 +73,10 @@ def _define_deps_flags(deps, inputs, is_msvc):
     include_dirs_set = {}
     for include_dir in inputs.include_dirs:
         include_dirs_set[include_dir] = "-I$$EXT_BUILD_ROOT$$/" + include_dir
-    for header in inputs.headers:
-        include_dir = header.dirname
-        if not include_dirs_set.get(include_dir):
-            include_dirs_set[include_dir] = "-I$$EXT_BUILD_ROOT$$/" + include_dir
+    #for header in inputs.headers:
+    #    include_dir = header.dirname
+    #    if not include_dirs_set.get(include_dir):
+    #        include_dirs_set[include_dir] = "-I$$EXT_BUILD_ROOT$$/" + include_dir
     include_dirs = include_dirs_set.values()
 
     # For the external libraries, we need to refer to the places where
